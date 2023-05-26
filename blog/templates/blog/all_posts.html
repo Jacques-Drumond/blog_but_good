@@ -7,13 +7,17 @@
 {% endblock title %}
 
 {% block css_files %}
-    <link rel="stylesheet" href="{% static 'blog/index.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/post.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/all-posts.css' %}">
 {% endblock css_files %}
 
 {% block content %}
-    <section id="all_posts">
-        <h2></h2>
+    <section id="all-posts">
+        <h2>My Collected Posts</h2>
         <ul>
+        {% include "blog/includes/post.html" %}
+        {% include "blog/includes/post.html" %}
+        {% include "blog/includes/post.html" %}
         {% include "blog/includes/post.html" %}
         {% include "blog/includes/post.html" %}
         {% include "blog/includes/post.html" %}
