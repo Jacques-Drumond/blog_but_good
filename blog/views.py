@@ -7,7 +7,7 @@ def starting_page(request):
     return render(request, "blog/index.html")
 
 def posts(request):
-    return HttpResponse("Posts") 
+    return HttpResponse("Pagina Posts") 
 
 def post_detail(request):
     pass

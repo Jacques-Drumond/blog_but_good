@@ -12,17 +12,12 @@
     <link rel="stylesheet" href="{% static 'blog/index.css' %}">
 {% endblock css_files %}
 
-    <header id="main-navigation">
-        <h1><a href="">Jacques' Blog</a></h1>
-        <nav>
-            <a href="">All Posts</a>
-        </nav>
-    </header>
+
 
     <section id="welcome">
         <header>
-            <img src="" alt="Jacques - The Author of This Blog"/>
-            <h2>JACQUES BLOG</h2>
+            <img src="{% static 'blog/images/me.jpg' %}" alt="Jacques - The Author of This Blog"/>
+            <h2>JACQUES' BLOG</h2>
         </header>
         <P>Hi, I am Jacques and I love to blog about tech!
     </section>
@@ -30,18 +25,7 @@
     <section id="latest-posts">
         <h2>My Latest Thoughts</h2>
         <ul>
-            <li>
-                <article class="post">
-                    <a href="">
-                        <img src="" alt="Montain Hiking">
-                        <div class="post__content">
-                            <h3>Montain Hiking</h3>
-                            <p>Thre's nothing like the views you get when hiking in the montains! 
-                            And I was'nt prepared for what happend whilist I was enjoying the view!</p>
-                        </div>
-                    </a>
-                </article>
-            </li>
+            {% include "blog/includes/post.html" %}
         </ul>
     </section>
     <section id="about">
