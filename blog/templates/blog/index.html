@@ -20,13 +20,15 @@
             <img src="{% static 'blog/images/me.jpg' %}" alt="Jacques - The Author of This Blog"/>
             <h2>JACQUES' BLOG</h2>
         </header>
-        <P>Hi, I am Jacques and I love to blog about tech!
+        <P>Hi, I am Jacques and I love to blog about everything!
     </section>
 
     <section id="latest-posts">
         <h2>My Latest Thoughts</h2>
         <ul>
-            {% include "blog/includes/post.html" %}
+            {% for post in posts %}
+                {% include "blog/includes/post.html" %}
+            {% endfor %}
         </ul>
     </section>
     <section id="about">
