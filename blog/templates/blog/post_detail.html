@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    This post title
+    {{post.title}}
 {% endblock title %}
 
 
@@ -14,19 +14,16 @@
 
 {% block content %}
     <section id="summary">
-        <h2>Post title</h2>
+        <h2>{{post.title}}</h2>
         <article>
-            <img src="{% static 'blog/images/montain.jpg' %}" alt="post title">
+            <img src="{% static 'blog/images/' %}{{post.image}}" alt="{{post.title}}">
             <address>By Jacques</address>
             <div>
-                Last Updated on <time>July 10th</time>
+                Last Updated on <time>{{post.date|date:"D d M Y"}}</time>
             </div>
         </article>
     </section>
     <main>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Nobis aliquam rem, 
-            hic tempore similique veritatis deleniti possimus rerum at 
-            ullam ipsa accusantium atque quia, aut numquam natus! Ex, animi in.</p>
+        <p>{{post.content|linebreaks}}</p>
     </main>
 {% endblock content %}
