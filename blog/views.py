@@ -1,27 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound
-from datetime import date
-from .models import BlogPost
+from .models import Post,Author,Tag
 # Create your views here.
 
 
 def starting_page(request):
-    latest_posts = BlogPost.objects.order_by('-date')[:3]
+    latest_posts = Post.objects.order_by('-date')[:3]
     return render(request, "blog/index.html", {
         "posts": latest_posts
     })
 
 def posts(request):
-    all_posts = BlogPost.objects.all()
+    all_posts = Post.objects.order_by('-date')
     return render(request, "blog/all_posts.html", {
         "posts": all_posts
     })
 
 def post_detail(request, slug):
-    try:
-        post = BlogPost.objects.get(slug=slug)
-        return render(request, "blog/post_detail.html", {
-            "post": post
-        })
-    except BlogPost.DoesNotExist:
-        return render(request, "404.html")
+    post = get_object_or_404(Post, slug=slug)
+    author = post.author
+    tag = post.tags
+    print(tag)
+    return render(request, "blog/post_detail.html", {
+        "post": post,
+        "tags": post.tags.all()
+    })
