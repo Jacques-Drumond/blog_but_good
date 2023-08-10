@@ -25,7 +25,7 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     excerpt = models.CharField(max_length=200)
-    image = models.CharField(max_length=150)
+    image = models.ImageField(upload_to="")
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, max_length=200, db_index=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
