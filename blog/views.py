@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 from .forms import CommentForm
 
+
 class StartingPageView(ListView):
     template_name = "blog/index.html"
     model = Post
@@ -38,11 +39,26 @@ class PostDetail(View):
     def get(self, request, slug):
     
         post = Post.objects.get(slug=slug)
+
+        stored_posts = request.session.get("stored_posts")
+
+        if stored_posts is not None:
+            is_saved_for_later = post.id in stored_posts # type: ignore
+        else:
+            is_saved_for_later = False
+
+        comments = post.comments.all().order_by("-id") # type: ignore
+        if comments is None or len(comments) == 0:
+            has_comments = False
+        else:
+            has_comments = True
         context = {
             "post": post,
             "post_tags": post.tags.all(),
             'comment_form': CommentForm(),
-            "comments": post.comments.all().order_by("-id")
+            "comments": comments, # type: ignore
+            "has_comments": has_comments,
+            "is_saved_for_later": is_saved_for_later
         }
         return render(request, "blog/post_detail.html", context)
 
@@ -61,6 +77,43 @@ class PostDetail(View):
                 "post": post,
                 "post_tags": post.tags.all(),
                 'comment_form': comment_form,
-                "comments": post.comments.all().order_by("-id")
+                "comments": post.comments.all().order_by("-id") # type: ignore
             }
             return render(request, "blog/post_detail.html", context)
+
+
+class ReadLaterView(View):
+
+    def get(self, request):
+        stored_posts = request.session.get("stored_posts")
+
+        context = {}
+
+        if stored_posts is None or len(stored_posts) == 0:
+            context["posts"] = []
+            context["has_posts"] = False
+        else:
+            posts = Post.objects.filter(id__in=stored_posts)
+            context["posts"] = posts
+            context["has_posts"] = True
+        
+        return render(request, "blog/stored_posts.html", context)
+
+    def post(self, request):
+        stored_posts = request.session.get("stored_posts")
+
+        if stored_posts is None:
+            stored_posts = []
+
+        post_id = int(request.POST['post_id'])
+
+        if post_id not in stored_posts:
+            stored_posts.append(post_id)
+        
+        else:
+            print("removido do read later")
+            stored_posts.remove(post_id)
+
+        request.session["stored_posts"] = stored_posts
+
+        return HttpResponseRedirect("/")

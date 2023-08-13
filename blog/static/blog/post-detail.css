@@ -176,3 +176,20 @@ text-align: center;
 #comments h2 {
   color: #5706c0;
 }
+
+#read-later {
+  margin: 1rem 0;
+}
+
+#read-later button {
+  background-color: rgb(24, 26, 27);
+  border: 1px solid white;
+  padding: 0.5rem 2rem;
+  font: inherit;
+}
+
+#read-later button:hover,
+#read-later button:active {
+  background-color: white;
+  color: #390281;
+}

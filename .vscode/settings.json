@@ -2,5 +2,6 @@
     "emmet.includeLanguages": {"django-html":"html"},
     "auto-close-tag.activationOnLanguage": [
         "django-html",
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }

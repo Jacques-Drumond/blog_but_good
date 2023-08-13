@@ -22,9 +22,21 @@
 {% endif %}
     <section id="summary">
         <h2>{{post.title}}</h2>
-        {% for tag in tags %}
+        {% for tag in post_tags %}
         <div>#{{tag.caption}}</div>
         {% endfor %}
+        <div id="read-later">
+            <form action="{% url "read-later" %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" value="{{ post.id }}" name="post_id">
+                {% if not is_saved_for_later %}
+                <button>Read Later</button>
+                {% else %}
+                <button>Remove from read later</button>
+                {% endif %}
+            </form>
+        </div>
+
         <article>
             <img src="{{ post.image.url }}" alt="{{post.title}}">
             <address>By <a href="mailto:{{post.author.email}}">{{post.author}}</a></address>
@@ -37,7 +49,7 @@
     <main>
         <p>{{post.content|linebreaks}}</p>
     </main>
-
+    {% if has_comments %}
     <section id="comments">
         <ul>
             {% for comment in comments %}
@@ -48,7 +60,7 @@
             {% endfor %}
         </ul>
     </section>
-
+    {% endif %}
         <section id="comment-form">
             <form action="{% url "post-detail-page" post.slug %}" method="POST">
                 {% csrf_token %}
