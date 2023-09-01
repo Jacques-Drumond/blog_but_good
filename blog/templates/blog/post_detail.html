@@ -39,7 +39,7 @@
 
         <article>
             <img src="{{ post.image.url }}" alt="{{post.title}}">
-            <address>By <a href="mailto:{{post.author.email}}">{{post.author}}</a></address>
+            <address>By <a href="mailto:{{post.author.email}}">{{post.author}}, {{post.author.formation}}</a></address>
             <div>
                 Last Updated on <time>{{post.date|date:"D d M Y"}}</time>
             </div>
