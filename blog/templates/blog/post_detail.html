@@ -54,8 +54,10 @@
         <ul>
             {% for comment in comments %}
             <li>
+                <img id="profile-pic" src="{{comment.profile_image.url}}"></img>
                 <h2>{{ comment.user_name }}</h2>
                 <p>{{ comment.comment|linebreaks }}</p>
+                <p>Rating: <strong>{{ comment.rating}}</strong></p>
             </li>
             {% endfor %}
         </ul>

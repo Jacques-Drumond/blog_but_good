@@ -8,5 +8,7 @@ class CommentForm(forms.ModelForm):
         labels = {
             "user_name": "Your Name",
             "user_email": "Your Email",
-            "text": "Comment"
+            "text": "Comment",
+            "rating": "Your rating",
+            "profile_image": "Profile image"
         }

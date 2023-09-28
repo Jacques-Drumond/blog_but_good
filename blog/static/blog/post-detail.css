@@ -193,3 +193,8 @@ text-align: center;
   background-color: white;
   color: #390281;
 }
+
+#profile-pic {
+  max-width: 10rem;
+  max-height: 3rem;
+}
